@@ -10,7 +10,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
       - ConnectionStrings__BookDB=Server=db-14669.cvqmuq04evkc.us-east-1.rds.amazonaws.com;Database=Catalog;User Id=admin;Password=Ily0sbek2003
     ports:
-      - "5264:80"  # Map host port 5264 to container port 80
+      - "5265:80"  # Map host port 5264 to container port 80
 
   nginx:
     image: nginx:latest
