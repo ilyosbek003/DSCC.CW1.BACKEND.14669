@@ -3,27 +3,21 @@ version: '3.3'
 services:
   api:
     build:
-      context: .
+      context: .  # Use the current directory as build context
       dockerfile: Dockerfile
     container_name: book-api
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - ConnectionStrings__BookDB=Server=db-14669.cvqmuq04evkc.us-east-1.rds.amazonaws.com;Database=Catalog;User Id=admin;Password=Ily0sbek2003
+      - ConnectionStrings__BookDB=Server=db-14669.cvqmuq04evkc.us-east-1.rds.amazonaws.com;Database=Catalog;User Id=admin;password=Ily0sbek2003
     ports:
-      - "5265:80"  # Map host port 5264 to container port 80
+      - "5265:80"  # Adjust port mapping if necessary
 
   nginx:
     image: nginx:latest
     container_name: nginx-container
     ports:
-      - "80:80"  # Map host port 80 to container port 80
+      - "80:80"
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf  # Mount the NGINX config file
+      - ./nginx.conf:/etc/nginx/nginx.conf
     depends_on:
-      - api  # Ensure NGINX starts after the API service
-    networks:
-      - my-network
-
-networks:
-  my-network:
-    driver: bridge
+      - api  # Ensure NGINX waits for the API to start
